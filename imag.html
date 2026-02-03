@@ -1,0 +1,228 @@
+<!DOCTYPE HTML>
+<html lang="en" dir="ltr">
+<head>
+    <title>Image Gallery</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            padding: 10px;
+            font-family: Arial, sans-serif;
+        }
+        
+        .gallery-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 10px;
+        }
+        
+        .gallery-item {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        
+        .gallery-item a {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .image-title {
+            padding: 10px;
+            text-align: center;
+            font-size: 14px;
+            color: #333;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        /* Lightbox styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .lightbox.active {
+            display: flex;
+        }
+        
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            z-index: 1001;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            }
+            
+            .gallery-item img {
+                height: 150px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            
+            .gallery-item img {
+                height: 120px;
+            }
+            
+            body {
+                padding: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery-container">
+        <div class="gallery-grid">
+            <!-- الصورة الأولى -->
+            <div class="gallery-item">
+                <a href="https://i.postimg.cc/6QBjhHnt/IMG-1770149079674.jpg" target="_blank" class="image-link" data-full="https://i.postimg.cc/6QBjhHnt/IMG-1770149079674.jpg">
+                    <img src="https://i.postimg.cc/rDYNVNfP/IMG-1770149079674.jpg" alt="IMG 1770149079674" loading="lazy">
+                </a>
+                <div class="image-title">IMG 1770149079674</div>
+            </div>
+            
+            <!-- الصورة الثانية -->
+            <div class="gallery-item">
+                <a href="https://i.postimg.cc/YStnxXY0/Screenshot-2026-02-03-16-13-29-894-com-upscrolled-app-edit.jpg" target="_blank" class="image-link" data-full="https://i.postimg.cc/YStnxXY0/Screenshot-2026-02-03-16-13-29-894-com-upscrolled-app-edit.jpg">
+                    <img src="https://i.postimg.cc/v4StYtPw/Screenshot-2026-02-03-16-13-29-894-com-upscrolled-app-edit.jpg" alt="Screenshot ٢٠٢٦ ٠٢ ٠٣ ١٦ ١٣ ٢٩ ٨٩٤ com upscrolled app edit" loading="lazy">
+                </a>
+                <div class="image-title">Screenshot 2026-02-03</div>
+            </div>
+            
+            <!-- الصورة الثالثة -->
+            <div class="gallery-item">
+                <a href="https://i.postimg.cc/XvnHg2dr/Screenshot-2026-02-03-22-01-29-305-pro-sketchware.jpg" target="_blank" class="image-link" data-full="https://i.postimg.cc/XvnHg2dr/Screenshot-2026-02-03-22-01-29-305-pro-sketchware.jpg">
+                    <img src="https://i.postimg.cc/QFnJ8J6D/Screenshot-2026-02-03-22-01-29-305-pro-sketchware.jpg" alt="Screenshot ٢٠٢٦ ٠٢ ٠٣ ٢٢ ٠١ ٢٩ ٣٠٥ pro sketchware" loading="lazy">
+                </a>
+                <div class="image-title">Screenshot 2026-02-03</div>
+            </div>
+            
+            <!-- الصورة الرابعة -->
+            <div class="gallery-item">
+                <a href="https://i.postimg.cc/cJd9cDwr/Screenshot-2026-02-03-22-05-56-191-pro-sketchware.jpg" target="_blank" class="image-link" data-full="https://i.postimg.cc/cJd9cDwr/Screenshot-2026-02-03-22-05-56-191-pro-sketchware.jpg">
+                    <img src="https://i.postimg.cc/LJ0393yp/Screenshot-2026-02-03-22-05-56-191-pro-sketchware.jpg" alt="Screenshot ٢٠٢٦ ٠٢ ٠٣ ٢٢ ٠٥ ٥٦ ١٩١ pro sketchware" loading="lazy">
+                </a>
+                <div class="image-title">Screenshot 2026-02-03</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox لعرض الصورة بكامل الشاشة -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="closeLightbox">&times;</button>
+        <img id="lightbox-img" src="" alt="">
+    </div>
+
+    <script>
+        // Lightbox functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const closeLightbox = document.getElementById('closeLightbox');
+            const imageLinks = document.querySelectorAll('.image-link');
+            
+            // فتح Lightbox عند النقر على الصورة
+            imageLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const fullSizeUrl = this.getAttribute('data-full') || this.getAttribute('href');
+                    lightboxImg.src = fullSizeUrl;
+                    lightbox.classList.add('active');
+                    document.body.style.overflow = 'hidden'; // منع التمرير
+                });
+            });
+            
+            // إغلاق Lightbox
+            closeLightbox.addEventListener('click', function() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // إغلاق Lightbox عند النقر خارج الصورة
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === lightbox) {
+                    lightbox.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // إغلاق Lightbox بمفتاح ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                    lightbox.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // فتح الصورة في نافذة جديدة عند النقر بالزر الأيمن أو Ctrl+click
+            imageLinks.forEach(link => {
+                link.addEventListener('auxclick', function(e) {
+                    if (e.button === 1) { // Middle click
+                        window.open(this.getAttribute('href'), '_blank');
+                    }
+                });
+                
+                link.addEventListener('contextmenu', function(e) {
+                    // السماح بقائمة الزر الأيمن الافتراضية
+                });
+            });
+        });
+    </script>
+</body>
+</html>
